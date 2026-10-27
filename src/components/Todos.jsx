@@ -27,7 +27,12 @@ function Todos() {
     setTodos(todos.filter((todo) => todo.id !== id))
   }
 
+  function handleClearCompleted() {
+    setTodos(todos.filter((todo) => !todo.completed))
+  }
+
   const itemsLeft = todos.filter((todo) => !todo.completed).length
+  const hasCompletedTodos = todos.some((todo) => todo.completed)
 
   return (
     <section className="mx-auto max-w-[550px]">
@@ -120,9 +125,15 @@ function Todos() {
                   </button>
                 </li>
               </ul>
-              <button type="button" className="cursor-pointer justify-self-end hover:underline">
-                Clear completed
-              </button>
+              {hasCompletedTodos && (
+                <button
+                  type="button"
+                  onClick={handleClearCompleted}
+                  className="cursor-pointer justify-self-end hover:underline"
+                >
+                  Clear completed
+                </button>
+              )}
             </footer>
           </>
         )}
